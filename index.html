@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0">
+    <title>Detectar Rotação</title>
+</head>
+<body>
+    <div id="portrait" style="width: 100%; height: 100%; display: none">
+        <h6 style="vertical-align: center">Modo retrato: gire a tela pra alterar</h6>
+    </div>
+
+    <div id="landscape" style="width: 100%; height: 100%; display: none">
+        <h6 style="vertical-align: center">Modo paisagem: gire a tela pra alterar</h6>
+    </div>
+
+    <script>
+        //Adiciona evento que define o layout para a rotação atual da tela quando a página é carregada
+        window.addEventListener("load", setOrientation);
+
+        //Adiciona evento que define o layout sempre que a rotação da tela for alterada
+        window.addEventListener("orientationchange", setOrientation, false);        
+
+        /**
+         * Define o layout a ser exibido de acordo com a rotação atual da tela.
+         */
+        function setOrientation() {
+            if (!window.orientation || window.orientation == "90" || window.orientation == "-90") {
+                console.log("Landscape: " + window.orientation);
+                document.getElementById("portrait").style.display = "none";
+                document.getElementById("landscape").style.display = "block";
+                document.body.style.backgroundImage = "url('landscape.jpg')";
+            } else {
+                console.log("Portrait: " + window.orientation);
+                document.getElementById("portrait").style.display = "block";
+                document.getElementById("landscape").style.display = "none";
+                document.body.style.backgroundImage = "url('portrait.jpg')";
+            }
+        }
+    </script>    
+</body>
+</html>
